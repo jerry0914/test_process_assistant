@@ -1,0 +1,430 @@
+
+#hint_icon{
+	background-image:url('../image/hint.png');
+	width:36px;
+	height:36px;
+	padding:3px;
+	background-repeat:no-repeat;
+}
+
+#st_wiki_link{
+	width:36px;
+	height:36px;
+	background-image:url('../image/dokuwiki.png');
+	background-repeat: no-repeat;
+}
+
+#test_hint_body{
+	width:100%;
+	height:100%;
+	overflow:auto;
+}
+
+#verdict_btns a {
+	position: fixed;
+	transition: 0.3s;
+	padding: 15px;				
+	text-decoration: none;
+	font-size: 16px;
+	color: white;
+	border-radius: 0 5px 5px 0;
+}
+#verdict_btns a:hover {
+	left: 0;
+}
+#verd_p {
+	top: 280px;
+	left: -70px;
+	width: 90px;
+	background-color:limegreen;
+}
+#verd_f {
+	top: 340px;
+	left: -70px;
+	width: 90px;
+	background-color:red;
+}
+#verd_b {
+	top: 400px;
+	left: -100px;
+	width: 120px;
+	background-color:tomato;
+}
+#verd_e {
+	top: 460px;
+	left: -110px;
+	width: 130px;
+	background-color:purple;
+}
+#verd_i {
+	top: 520px;
+	left: -120px;
+	width: 140px;
+	background-color:goldenrod;
+}
+#txt_result{
+	font-size: 24px;
+}
+#current_tc_verdict{
+	width: 96%;
+	height:60px;
+    line-height:60px;
+    font-size: 4vh;
+    text-align: center;
+    color:white;
+    background-color:white;
+}
+
+#current_tc_comment{
+	width: 96%;
+	max-height:60px;
+    font-size: 14px;
+    text-align: left;
+    color:white;
+}
+
+#current_tc_tester{
+	width: 96%;
+    font-size: 14px;
+    text-align: left;
+    color:black;
+}
+
+#current_tc_verdict[verdict="Passed"]{
+	background-color:limegreen ;
+}
+#current_tc_verdict[verdict="Failed"]{
+	background-color:red;
+}
+#current_tc_verdict[verdict="Blocked"]{
+	background-color:tomato;
+}
+#current_tc_verdict[verdict="Exempted"]{
+	background-color:purple;
+}
+#current_tc_verdict[verdict="Indeterminate"]{
+	background-color:goldenrod;
+}
+
+#current_tc_comment[verdict="Passed"]{
+	color:green;
+}
+#current_tc_comment[verdict="Failed"]{
+	color:red;
+}
+#current_tc_comment[verdict="Blocked"]{
+	color:tomato;
+}
+#current_tc_comment[verdict="Exempted"]{
+	color:purple;
+}
+#current_tc_comment[verdict="Indeterminate"]{
+	color:darkgoldenrod;
+}
+
+#txt_testcase_verdict{
+	font-weight: bold;
+}
+
+#txt_testcase_verdict[verdict="Passed"]{
+	color:limegreen;
+}
+
+#txt_testcase_verdict[verdict="Failed"]{
+	color:red;
+}
+
+#txt_testcase_verdict[verdict="Blocked"]{
+	color:tomato;
+}
+
+#txt_testcase_verdict[verdict="Exempted"]{
+	color:purple;
+}
+
+#txt_testcase_verdict[verdict="Indeterminate"]{
+	color:goldenrod;
+}
+
+#table_current_progress{
+	width:96%;
+}
+
+#table_current_progress th{
+	height:30px;
+	text-align: center;
+	background-color: royalblue;
+	color:white;
+	width: 10%
+}
+
+#table_current_progress #th_total{
+	width: 22%;
+}
+
+#table_current_progress td{
+	height:29px;
+	text-align: center;
+}
+	
+#table_current_progress #cur_prog_total{
+	font-weight:bold;
+}
+
+#table_current_progress #cur_prog_p{
+	color:limegreen;
+}
+
+#table_current_progress #cur_prog_f{
+	color:red;
+}
+
+#table_current_progress #cur_prog_b{
+	color:tomato;
+}
+
+#table_current_progress #cur_prog_e{
+	color:purple;
+}
+
+#table_current_progress #cur_prog_i{
+	color:goldenrod;
+}
+
+#table_tr_history_results{
+	width:96%;
+	overflow:auto;
+}
+
+#table_tr_history_results th{
+	background-color:blue;
+	color:white;
+}
+
+#table_tr_history_results #tr_his_th_result{
+	width:10%; 
+}
+
+#table_tr_history_results #tr_his_th_tester{
+	width:14%; 
+}
+
+#table_tr_history_results #tr_his_th_time{
+	width:20%; 
+}
+
+#table_tr_history_results #tr_his_th_comment{
+	width:56%; 
+}
+
+#table_all_history_results{
+	width:96%;
+	overflow:auto;
+}
+
+#table_all_history_results th{
+	background-color:#AA2244;
+	color:white;
+}
+
+#table_all_history_results #all_his_th_testrun{
+	width:16%; 
+}
+
+#table_all_history_results #tr_his_th_result{
+	width:8%; 
+}
+
+#table_all_history_results #tr_his_th_tester{
+	width:10%; 
+}
+
+#table_all_history_results #tr_his_th_time{
+	width:16%; 
+}
+
+#tr_tc_list option[verdict="Passed"]{
+	color:limegreen;
+}
+#tr_tc_list option[verdict="Failed"]{
+	color:red;
+}
+#tr_tc_list option[verdict="Blocked"]{
+	color:tomato;
+}
+#tr_tc_list option[verdict="Exempted"]{
+	color:purple;
+}
+#tr_tc_list option[verdict="Indeterminate"]{
+	color:goldenrod;
+}
+
+#tr_tc_list option[automated="A"]{
+	background-color:aquamarine;
+}
+
+#tr_tc_list option[automated="S"]{
+	background-color:khaki;
+}
+
+#tr_tc_list option[has_note]{
+	font-weight: bold;
+}
+
+
+[session_title] {	
+	font-size:x-large;
+	font-weight:bold;
+}
+
+#txt_tr_name,#tr_tc_index{
+	height:36px;
+	line-height:36px;
+}
+
+#txt_tr_name{
+	color:royalblue;
+	font-weight:bold;
+}
+
+#txt_tc_id,#txt_tc_title{
+	height:40px;
+	line-height:40px;
+	text-align:left;
+	font-weight:bold;
+}
+
+#btn_backward:hover {
+	left: 0;
+}
+
+#btn_backward{
+	top:10px;
+	width:64px;
+    height:64px;
+	left:-45px;
+    background-image:url("../image/backward.png");
+    position: fixed;
+	transition: 0.3s;
+	text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 35px;
+    line-height: 1.33;
+    background-repeat: no-repeat;
+    background-position:center;
+	background-color: cornflowerblue;
+}
+
+#sticky_note{
+	transition: 0.3s;
+	background-color: lightgray;
+}
+
+
+#btn_previous_tc,#btn_next_tc{
+	background-color:royalblue;
+	color:white;
+	padding: 0px;
+	border-radius:12px;
+}
+
+#tc_icons_panel i{
+	width:36px;
+	height:36px;
+	padding:3px;
+	background-repeat: no-repeat
+}
+
+#hint_panel{
+	position:absolute;
+	transition: 0.3s;
+	width:36px;
+	height:36px;
+	padding:3px;
+	top:0px;
+	left:-40px;
+	z-index:900;
+}
+
+#hint_message,#hint_edit_message{
+	border:1px dashed;
+	height:100%;
+}
+#hint_header,#hint_footer{
+	height:46px;
+}
+
+#btn_attachment{
+	width:32px;
+	height:32px;
+	background-image:url("../image/attachment.png");
+	background-repeat: no-repeat;
+}
+
+#test_result_modal{
+	font-size:14px;
+}
+
+#content_failed_details{
+	font-size: 13px;
+	border:1px solid;
+	border-color: lightgray;
+	border-radius: 5px;
+	padding:2px;	
+	margin-left: 12px;
+	margin-right: 12px;
+}
+
+#content_failed_details div{
+	margin-top: 1px;
+}
+#content_failed_details input{
+	margin-left: 3px;
+}
+
+#content_failed_details textarea{
+	font-size: 13px;
+}
+
+.modal {
+	top:2%;
+	left:5%;
+	right:5%;
+	bottom:2%;
+}
+
+.modal-dialog{
+	min-width: 1024px;
+	width:100%;
+}
+
+.modal input{
+	border:none 1px;
+	border-bottom: dashed 1px;
+	border-color:lightgray;
+	margin-left:3px;
+	color:royalblue;
+}
+
+.modal textarea{
+	border:dashed 1px;
+	border-color:lightgray;
+	margin-left:3px;
+	color:royalblue;
+}
+
+.modal [subtitle]{
+	font-style:italic;
+	text-decoration:underline;
+}
+
+#current_tc_comment[failed_details]{
+	text-decoration:underline;
+	font-weight: bold;
+	cursor:help;
+}
+
+#current_tc_comment[hyperlink]{
+	text-decoration:underline;
+	cursor:pointer;
+}

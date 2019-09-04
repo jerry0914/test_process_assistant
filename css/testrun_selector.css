@@ -1,0 +1,112 @@
+#filter_panel .row{
+	width:96%;
+}
+
+#table_tr_overview{
+	width:96%;
+}
+
+#table_tr_overview table,th,tr,td {
+	border:1px solid black;
+}
+
+#table_tr_overview thead th{
+	background-color: royalblue;
+	color:white;
+	text-align: center;
+}
+
+#table_tr_overview thead [col_grp="Title"]{
+	width:59%;
+	text-align: left;
+}
+
+
+#table_tr_overview thead [col_grp="All"]{
+width:6%;
+}
+
+#table_tr_overview thead [col_grp="P,F,B,E,I"]{
+width:6%;
+}
+
+#table_tr_overview thead [col_grp="N"]{
+width:6%;
+}
+
+#table_tr_overview thead [col_grp="P"]{
+width:6%;
+}
+
+#table_tr_overview td[col_grp="Title"]{
+	text-align: left;
+}
+
+#table_tr_overview tbody{
+	text-align: center;
+}
+
+#table_tr_overview tfoot{
+	text-align: center;
+	font-weight: bold;
+}
+
+#  tbody [col_grp="All"],tfoot [col_grp="All"],
+#table_tr_overview tbody [col_grp="N"],tfoot [col_grp="N"],
+#table_tr_overview tbody [col_grp="P,F,B,E,I"],tfoot [col_grp="P,F,B,E,I"]
+{
+	color:black;
+}
+
+#table_tr_overview tbody [col_grp="P"],tfoot [col_grp="P"]{
+	color:limegreen;
+}
+
+#table_tr_overview tbody [col_grp="F"],tfoot [col_grp="F"]{
+	color:red;
+}
+
+#table_tr_overview tbody [col_grp="B"],tfoot [col_grp="B"]{
+	color:tomato;
+}
+
+#table_tr_overview tbody [col_grp="E"],tfoot [col_grp="E"]{
+	color:purple;
+}
+
+#table_tr_overview tbody [col_grp="I"],tfoot [col_grp="I"]{
+	color:goldenrod;
+}
+
+#table_tr_overview tbody [col_grp="All"]>font:hover,
+                   tbody [col_grp="N"]>font:hover,
+                   tbody [col_grp="P,F,B,E,I"]>font:hover,
+                   tbody [col_grp="P"]>font:hover,
+				   tbody [col_grp="F"]>font:hover,
+				   tbody [col_grp="B"]>font:hover,
+				   tbody [col_grp="E"]>font:hover,
+				   tbody [col_grp="I"]>font:hover,				   
+				   tfoot [col_grp="All"]>font:hover,
+                   tfoot [col_grp="N"]>font:hover,
+                   tfoot [col_grp="P,F,B,E,I"]>font:hover,
+                   tfoot [col_grp="P"]>font:hover,
+				   tfoot [col_grp="F"]>font:hover,
+				   tfoot [col_grp="B"]>font:hover,
+				   tfoot [col_grp="E"]>font:hover,
+				   tfoot [col_grp="I"]>font:hover{
+	cursor:pointer;
+	text-decoration:underline; 
+}
+
+
+#search_page,#search_tab{
+	background-color:#E1FAFF;
+}
+
+#filter_tab,#filters_page{
+	background-color:#F2FFD6;
+}
+
+#search_ID,#search_Title,#search_Note{
+	color:blue;
+}

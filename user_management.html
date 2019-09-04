@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="image/favicon.png">
+		<title>USI SW-ST Testing Process Assistant</title>
+		<!-- Bootstrap core CSS -->
+		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Bootstrap core JavaScript -->
+		<script src="vendor/jquery-3.3.1.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+		<!--Porrer 1.12.9 min -->
+		<script src="vendor/popper.js"></script>
+		<script src="vendor/tooltip.js"></script>
+		<!-- Custom styles for this template -->
+		<link href="css/logo-nav.css" rel="stylesheet">
+		<script src="js/login.js"></script>
+		<link href="css/user_management.css" rel="stylesheet">
+		<script src="js/user_management.js"></script>
+	</head>
+	
+	<body>
+		<!-- ============ Edit User Info Modal ============ -->
+		<div class="modal fade" id="modal_edit_user_info" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Edit User Information</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div style="padding-right:3px;padding-left:3px">Name: </div>
+						<div >
+							<input id="edit_user_info_fname" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="First name">
+							<input id="edit_user_info_lname" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="Last name">
+						</div>
+					</div>
+					<div class="row">
+						<div style="padding-right:3px;padding-left:3px">E-Mail: </div>
+						<input id="edit_user_info_email" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="E-Mail">
+						<div>@usiglobal.com</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_edit_user_info_ok">OK</button>
+					<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- ============ Edit User Info Modal ============ -->
+
+		<!-- ============ Change user password ============ -->
+		<div class="modal fade" id="modal_change_user_password" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Change password</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<table class="row col-12 no-gutters">
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">Current: </div></td>
+							<td><input id="change_user_password_current" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px"></td>
+						</tr>
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">New: </div></td>
+							<td><input id="change_user_password_new" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px"></td>
+						</tr>
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">Confirm: </div></td>
+							<td><input id="change_user_password_confirm" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" ></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><div id='change_user_password_message' hidden>Message of changing user password</div></td>
+						</tr>
+					</table>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="btn_change_user_password_ok">OK</button>
+					<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- ============ Change user password ============ -->
+		<!-- Navigation -->
+		<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+			<div class="navbar-nav container">
+				<li></li>
+				<li class="nav_item active"><a id="nav_link_home" class="nav-link" href="./index.html" hidden>Home</a></li>
+				<li class="nav_item active"><a id="nav_link_testrun" class="nav-link" href="#" hidden>Test Run</a></li>
+				<li class="nav-item dropdown active" id="nav_item_testmanagement">
+					<a id="nav_link_testmanagement" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" hidden>Test Management</a>
+					<div class="dropdown-menu">
+						<a id="nav_link_testrun_import" class="dropdown-item" href="#" hidden>Import TestRun</a>
+						<a id="nav_link_testrun_management" class="dropdown-item" href="#" hidden>TestRun Management</a>
+						<a id="nav_link_testresult_review" class="dropdown-item" href="#" hidden>Test Result - Review</a>
+						<a id="nav_link_testing_productivity" class="dropdown-item" href="#" hidden>Testing productivity</a>
+					</div>
+				</li>
+				<li class="nav_item active"><a id="nav_link_admin" class="nav-link" href="#" hidden>Administration</a></li>
+				<!-- Login Area -->
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown order-1">
+						<button type="button" id="dropdownMenu_login" data-toggle="dropdown" class="btn btn-outline-primary dropdown-toggle">Login<span class="caret"></span></button>
+						<ul class="dropdown-menu dropdown-menu-right" style="width:300px">
+						   <li class="px-3 py-2">
+								<div id="div_user_account" class="form-group row no-gutters">
+									<input class="col-7" id="user_account" placeholder="Account" class="form-control form-control-sm" type="text" required="">
+									<div class="col-5">@usiglobal.com</div>
+								</div>
+								<div id="div_user_password" class="form-group">
+									<input id="user_password" placeholder="Password" class="form-control form-control-sm" type="password">
+								</div>
+								
+								<div class="message form-group" id="login_msg" style="color: #FF0000;font-weight: bold;text-align:left;width: 100%;"></div>
+								<div class="form-group row no-gutters">
+									<div id="edit_user_info" class='col-2' hidden>
+										<small><a href="#" data-toggle="modal" data-target="#modal_edit_user_info" onclick="send_req_get_user_info()">Edit</a></small>
+									</div>
+									<div id="change_user_password" data-toggle="modal" data-target="#modal_change_user_password" hidden>
+										<small><a href="#">Change password</a></small>
+									</div>
+							    </div>								
+								<div class="form-group">
+									<button id="btn_login" class="btn btn-primary btn-block">Login</button>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<!-- Login Area -->
+				<li></li>
+			</div>
+		</nav>
+		<!-- Navigation -->
+		<!-- Page Content -->
+		<div class="row mt-1 no-gutters " >
+			<div class="d-flex flex-row mt-4 row no-gutters col-12">
+                <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left col-2" role="navigation">
+                    <li class="nav-item">
+                        <a id="export_trs_tab" href="#create_new_user_tab_page" class="nav-link active" data-toggle="tab" role="tab" aria-controls="create_new_user_tab_page">Create new user</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="import_verdict_tab" href="#manage_user_tab_page" class="nav-link" data-toggle="tab" role="tab" aria-controls="manage_user_tab_page">Users management </a>
+                    </li>
+                </ul>
+                <div class="tab-content col-9 offset-1">
+                    <div class="tab-pane fade show active" id="create_new_user_tab_page" role="tabpanel">
+						<table class='row col-8 offset-1'>
+							<tbody>								
+								<tr>
+									<td>First Name: </td>
+									<td><input id='new_user_fname'></td>
+								</tr>
+								<tr>
+									<td>Last Name: </td>
+									<td><input id='new_user_lname'></td>
+								</tr>
+								<tr>
+									<td>E-Mail: </td>
+									<td><input id='new_user_email'></td>
+									<td>@usiglobal.com</td>
+								</tr>
+								<tr>
+									<td>Role: </td>
+									<td><select id='new_user_role'>
+											<option value=1>Guest</option>
+											<option value=2>Tester</option>
+											<option value=3>Test Leader</option>
+											<option value=5>Test Engineer</option>
+											<option value=9>Administrator</option>
+											<option value=15>Supervisor</option>
+										</select>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class='row offset-5'>							
+							<button id='btn_create_user' class='row col-2 offset-1 btn btn-sm btn-outline-primary'>Create</button> 
+						</div>
+						<div class='row col-8 offset-1' style="margin-top: 16px"><font  size=2 color="royalblue">☆ Default password is 'usi123' ☆</font></div>					              
+                    </div>
+                    <div class="tab-pane fade show" id="manage_user_tab_page" role="tabpanel">
+						<div class='row'>
+							<div class="col-2" style="scroll-behavior:auto">
+								<table id='all_users_list'>
+									
+								</table>
+							</div>
+							<div class="col-7 offset-1">
+								<table>
+									<tbody>										
+										<tr>
+											<td>First Name: </td>
+											<td><input id='edit_user_fname'></td>
+										</tr>
+										<tr>
+											<td>Last Name: </td>
+											<td><input id='edit_user_lname'></td>
+										</tr>
+										<tr>
+											<td>E-Mail: </td>
+											<td><input id='edit_user_email'></td>
+											<td>@usiglobal.com</td>
+										</tr>
+										<tr>
+											<td>Role: </td>
+											<td><select id='edit_user_role'>
+													<option value=1>Guest</option>
+													<option value=2>Tester</option>
+													<option value=3>Test Leader</option>
+													<option value=5>Test Engineer</option>
+													<option value=9>Administrator</option>
+													<option value=15>Supervisor</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td>Active</td>
+											<td><select id='edit_user_active'>
+													<option value=1>Yes</option>
+													<option value=0>No</option>
+												</select>
+											</td>
+										</tr>
+									</tbody>
+								</table>						
+								<div><button class='row col-1 offset-7 btn btn-sm btn-outline-primary' id='btn_edit_user_OK'>OK</button></div>
+								<table class='mt-4'>
+									<tr>
+										<td>Password: </td>
+										<td><input type=password id='edit_user_password'></td>
+										<td><button id=btn_edit_user_change_password class='btn btn-outline-success btn-sm'>Set password</button></td>
+									</tr>										
+								</table>								
+							</div>
+						</div>                 
+                    </div>
+                </div>
+            </div>
+		</div>
+		<input id="data_uid" type="hidden">
+		<input id="data_user_permission" type="hidden">		
+		<!-- /.container -->
+	</body>
+</html>
+
+

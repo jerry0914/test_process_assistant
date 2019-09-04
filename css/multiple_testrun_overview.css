@@ -1,0 +1,96 @@
+#table_tr_overview{
+	width:98%;
+	height:100%;
+	margin: 12px;
+}
+
+#table_tr_overview th,tr,td{
+	border:1px solid black;	
+}
+
+#table_tr_overview>thead{
+	background-color:royalblue;
+	color:white;
+	font-weight:bold;
+	text-align:center;
+	cursor: pointer;
+}
+
+#table_tr_overview th[col_grp="TestRun"]{
+	width:30%;
+	text-align: left;
+}
+
+#table_tr_overview th[col_grp="Title"]{
+	width:35%;
+	text-align: left;
+}
+
+#table_tr_overview th[col_grp="All"]{
+width:6%;
+}
+
+#table_tr_overview th[col_grp="P,F,B,E,I"]{
+width:6%;
+}
+
+#table_tr_overview th[col_grp="N"]{
+width:6%;
+}
+
+#table_tr_overview th[col_grp="P"]{
+width:6%;
+}
+
+#table_tr_overview td[col_grp="Title"],td[col_grp="TestRun"]{
+	text-align: left;
+}
+
+#table_tr_overview tbody{
+	text-align:center;
+}
+
+#table_tr_overview tfoot{
+	text-align:center;
+	font-weight:bold;
+}
+
+#table_tr_overview tbody [col_grp="All"],tbody [col_grp="N"],tbody [col_grp="P,F,B,E,I"]{
+	color:black;
+	cursor:pointer;
+}
+#table_tr_overview tbody [col_grp="All"]>font:hover,
+                   tbody [col_grp="N"]>font:hover,
+                   tbody [col_grp="P,F,B,E,I"]>font:hover,
+                   tbody [col_grp="P"]>font:hover,
+				   tbody [col_grp="F"]>font:hover,
+				   tbody [col_grp="B"]>font:hover,
+				   tbody [col_grp="E"]>font:hover,
+				   tbody [col_grp="I"]>font:hover{
+	cursor:pointer;
+	text-decoration:underline; 
+}
+
+#table_tr_overview tbody [col_grp="P"],tfoot [col_grp="P"]{
+	color:limegreen;
+}
+
+#table_tr_overview tbody [col_grp="F"],tfoot [col_grp="F"]{
+	color:red;
+}
+
+#table_tr_overview tbody [col_grp="B"],tfoot [col_grp="B"]{
+	color:tomato;
+}
+
+#table_tr_overview tbody [col_grp="E"],tfoot [col_grp="E"]{
+	color:purple;
+}
+
+#table_tr_overview  tbody [col_grp="I"],tfoot [col_grp="I"]{
+	color:goldenrod;
+}
+
+#table_tr_overview tfoot [col_grp="P,F,B,E,I"],tfoot [col_grp="All"],tfoot [col_grp="N"]{
+	color:black;
+}

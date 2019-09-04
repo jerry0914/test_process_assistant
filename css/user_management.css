@@ -1,0 +1,26 @@
+.nav-tabs--vertical{
+    border-bottom: none;
+    border-right: 1px solid;
+    display:flex;
+    flex-flow:column nowrap;
+}
+
+input,select {
+    margin:6px;
+    border: 0px;
+    border-bottom: 1px gray dotted;
+}
+
+#all_users_list font:hover{
+    cursor: pointer;
+    text-decoration:underline;
+    color:royalblue;
+}
+
+#all_users_list font[inactive]{
+    color:gray;
+}
+
+#all_users_list [selected]{
+    background:greenyellow;
+}

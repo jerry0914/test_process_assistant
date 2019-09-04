@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="image/favicon.png">
+		<title>USI SW-ST Testing Process Assistant</title>
+		<!-- Bootstrap core CSS -->
+		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Bootstrap core JavaScript -->
+		<script src="vendor/jquery-3.3.1.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+		<!--Porrer 1.12.9 min -->
+		<script src="vendor/tooltip.js"></script>
+		<script src="vendor/popper.js"></script>
+		<!-- Custom styles for this template -->
+		<link href="css/testrun.css" rel="stylesheet">
+		<script src="js/testrun.js"></script>
+		<script src="js/login.js"></script>
+		<script type="text/javascript">get_all_tc_id_title()</script>
+	</head>
+	<body>
+		<!-- ****************** Modals Begin  ****************** -->
+		<!-- test_result_modal begin -->
+		<div class="modal" id="test_result_modal">
+			<div class="modal-dialog">
+				<div class="modal-content">	
+					<div class="modal-header"> 						
+						<h4 class="modal-title" id="test_result_header">TcID: </h4>
+						<h4 id="txt_testcase_verdict"></h4>
+						<div>
+							<button id="btn_submit_testresult" type="button" class="btn btn-success" data-dismiss="modal" disabled>OK</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+						</div>						
+					</div>
+					<div class="modal-body">
+						<div id="form_tr_main">
+							<div class='row'>
+								<div id='lebel_tr_main' class="col" style="font-weight:bold">Comment:</div>
+								<a id="btn_test_result_issue_mode" href="#" hidden>Is it a new issue?</a>
+							</div>							
+							<div class="col">
+								<textarea class="form-control" rows="1" id="txt_tr_comment"></textarea>
+							</div>
+						</div>						
+						<div class='st-2' id="form_failed_details" hidden>
+							<div style="font-weight:bold">Details:</div>
+							<div class="row no-gutters" id="content_failed_details">
+								<div class="col-12 row no-gutters">		
+									<div class="col-6">
+										<div class="row col">
+											<div subtitle>Reproducing procedures:</div>														
+											<textarea class="form-control" rows="2" id="failed_reproduce_procedure" clearup></textarea>
+										</div>
+										<div class="row col">
+											<div subtitle>Expected result:</div>														
+											<textarea class="form-control" rows="2" id="failed_expected_result" clearup></textarea>
+										</div>
+										<div class="row col">
+											<div subtitle>Actual result:</div>														
+											<textarea class="form-control" rows="2" id="failed_actual_result" clearup></textarea>
+										</div>
+									</div>
+									<div class="col-6">
+										<div>
+											<div class="row col-12" subtitle>SW Details:</div>
+											<div class = "row col-12 no-gutters">
+												<div style="font-style:italic">OS:</div> 
+												<input type="txt" id="failed_sw_os_ver" >
+											</div>
+											<div class = "row col-12 no-gutters">
+												<div style="font-style:italic">Build Num:</div>
+												<input type="txt" id="failed_sw_build_num">
+											</div>
+											<div class = "row col-12 no-gutters">
+												<div style="font-style:italic">Build Date:</div>
+												<input type="txt" id="failed_sw_build_date">
+											</div>
+										</div>
+										<div>
+											<div class="row col-12" subtitle>HW Details: </div>
+											<div class = "row col-12 no-gutters">
+												<div style="font-style:italic">Phase:</div>
+												<input type="txt" id="failed_hw_phase">													
+											</div>
+											<div class = "row col-12 no-gutters">
+												<div style="font-style:italic">Serial Num:</div>
+												<input type="txt" id="failed_hw_serial_num">
+											</div>											
+										</div>
+										<div>
+											<div class="row col-12" subtitle>Benchmark:</div>
+											<textarea class="form-control" rows="2" id="failed_benchmark" clearup></textarea>							
+										</div>										
+									</div>									
+								</div>																
+							</div>								
+						</div>
+						<div class='st-2' id="form_jira_hyper_link">
+							<div style="font-weight:bold">JIRA link:</div>
+							<input type="txt" id="txt_jira_hyperlink" class="col">
+						</div>
+						<div class='st-2'>
+							<div style="font-weight:bold">Attachments:</div>
+							<div class="col-12">
+								<input type="txt" id="txt_tr_attachment" class="col">
+							</div>															
+						</div>									
+					</div>
+					<!-- <div class="modal-footer">						
+					</div> -->
+				</div>
+			</div>
+			<input id="data_test_result_issue_mode" type="hidden">
+		</div><!-- test_result_modal end -->
+		<!-- history_results_modal begin -->
+		<div class="modal" id="history_results_modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">						
+						<h4 class="modal-title" id="history_results_header">歷史記錄</h4>
+					</div>
+					<div class="modal-body" style="height:350px;overflow-y: auto">
+						<div class="mt-2"><b>This testrun:</b></div>
+						<table id="table_tr_history_results" border="1">
+							<tr>
+								<th id="tr_his_th_result">Result</th>
+								<th id="tr_his_th_tester">Tester</th>
+								<th id="tr_his_th_time">Time</th>
+								<th id="tr_his_th_comment">Comment</th>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- history_results_modal end -->
+		<!-- failed_details_modal begin -->
+		<div class="modal" id="failed_details_modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">						
+						<h4 class="modal-title">Details</h4>
+						<left>
+							<a href="#" hidden>Is it a new issue?</a>
+							<button type="button" id='btn_clear_failed_details' class='btn-secondary' edit_flag='False' hidden>CLEAR ALL</button>
+							<button type="button" id='btn_editable_failed_details' class='btn-secondary' edit_flag='False'>EDIT</button>
+						</left>
+					</div>
+					<div class="modal-body">
+						<div class='st-2 row' >
+							<div class='row col-12 no-gutters'>
+								<div id='subtitle_failed_summary' subtitle style='font-weight:bold'>Summary:</div>
+								<input id='text_failed_summary' class='col' style='font-weight:bold;color:royalblue' readonly placeholder='Summary of testing result'></input>
+							</div>							
+						</div>
+						<div class='st-2 row'>
+							<div class='col-7'>
+								<div>
+									<div class='row col' subtitle>Reproducing procedures:</div>
+									<textarea class='row col no-gutters' id='text_reproduce_procedure' readonly>Content of reproducing procedures</textarea>
+								</div>
+								<div class='st-1'>
+									<div class='row col' subtitle>Expected result:</div>
+									<textarea class='row col no-gutters' id='text_expected_result' readonly>Content of expected result</textarea>
+								</div>
+								<div class='st-1'>
+									<div class='row col' subtitle>Actual result:</div>
+									<textarea class='row col no-gutters' id='text_actual_result' readonly>Content of actual result</textarea>
+								</div>
+							</div>
+							<div class='col-5'>
+								<div>
+									<div class='row col' subtitle>SW information:</div>
+									<div class='row col no-gutters'>
+										<div>OS version:</div>
+										<input class='col' id='text_sw_os_version' placeholder='OS version' readonly></input>
+									</div>
+									<div class='row col no-gutters'>
+										<div>Build Number:</div>
+										<input class='col' id='text_sw_build_num' placeholder='Build number' readonly></input>
+									</div>
+									<div class='row col no-gutters'>
+										<div>Build Date:</div>
+										<input class='col' id='text_sw_build_date' placeholder='Build date' readonly></input>
+									</div>
+								</div>
+								<div class='st-1'>
+									<div class='row col' subtitle>HW information:</div>
+									<div class='row col no-gutters'>
+										<div>Phase:</div>
+										<input class='col' id='text_hw_phase' placeholder='Text of hw phase' readonly></input>
+									</div>
+									<div class='row col no-gutters'>
+										<div>Serial Number:</div>
+										<input class='col' id='text_hw_serial_num' placeholder='Serial number of DUT' readonly></input>
+									</div>									
+								</div>
+								<div class='st-1'>
+									<div class='row col' style='font-style: italic'>Benchmark:</div>
+									<textarea class='row col no-gutters' id='text_benchmark' readonly>Content of benchmark</textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class='st-2' align="right"><a  id="btn_copy_to_clipboard" href="#">Copy to clipboard</a></div>
+						<button type="button" class="btn btn-success" data-dismiss="modal" id='btn_edit_failed_details' hidden>Update</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+					<input id="data_failed_details_issue_mode" type="hidden">
+					<input id="data_failed_details_tcid" type="hidden">
+					<input id="data_failed_details_updateTime" type="hidden">
+					<input id="data_failed_details_tester" type="hidden">
+				</div>
+			</div>
+		</div>
+		<!-- failed_details_modal end -->
+		<!-- ****************** Modals End ****************** -->
+	   	<!-- Page Content -->
+		<div id="top_panel" class="nav row fixed-top" style="background-color: white">
+			<div class="col-1">
+				<button id="btn_backward" type="button" class="btn btn-circle"></button>
+			</div>
+			<div class="col-6">
+				<div class="row no-gutters">
+					<div session_title>TestRun</div>
+					<span>&#160;&#160;</span>
+					<div id="txt_tr_name">-----</div>	
+					<div id="tr_tc_index" class="col" style="text-align:right">--/---</div>
+				</div>
+				<div class="row no-gutters mt-1">	
+					<button type="button" class="btn col-1" id="btn_previous_tc" onclick="previous_tc()">&#8593;</button>
+					<select class="form-control col-10" id="tr_tc_list" onchange="selected_tc_change()"></select>
+					<button type="button" class="btn col-1" id="btn_next_tc" onclick="next_tc()">&#8595;</button>
+				</div>
+			</div>	
+			
+			<div class="col-4">
+				<div class="row no-gutters">
+					<div class="col-2" id="current_tc_verdict">---</div>
+					<div class="col">
+						<table id="table_current_progress" border="1">
+							<tr>
+								<th id='th_total'>Total</th>
+								<th>P</th>
+								<th>F</th>
+								<th>B</th>
+								<th>E</th>
+								<th>I</th>
+							</tr>
+							<tr>
+								<td id="cur_prog_total">--/---</td>
+								<td id="cur_prog_p">--</td>
+								<td id="cur_prog_f">--</td>
+								<td id="cur_prog_b">--</td>
+								<td id="cur_prog_e">--</td>
+								<td id="cur_prog_i">--</td>
+							</tr>							
+						</table>						
+					</div>				
+				</div>
+				<div class="row no-gutters">
+					<div class="col-2" id="current_tc_tester"></div>
+					<div class="col" style="overflow-y:auto" id="current_tc_comment"></div>
+					<a href="#" class="btn" id="btn_attachment" data-toggle="tooltip" title="" hidden></a>
+				</div>				  
+			</div>					
+		</div>
+		<div class="row no-gutters mt-2">
+			<div class = "col-1" id="left_panel" >
+				<div class="btn" id="verdict_btns" data-toggle="modal" data-target="#test_result_modal" onclick="init_result_modal()">
+					<a id="verd_p" onclick="verdict_btn_clicked('Passed')">Passed</a>
+					<a id="verd_f" onclick="verdict_btn_clicked('Failed')">Failed</a>
+					<a id="verd_b" onclick="verdict_btn_clicked('Blocked')">Blocked</a>
+					<a id="verd_e" onclick="verdict_btn_clicked('Exempted')">Exempted</a>
+					<a id="verd_i" onclick="verdict_btn_clicked('Indeterminate')">Indeterminate</a>
+				</div>				
+			</div>		
+			<div class="col-10 mt-2" id="central_panel">
+				<div calss="row no-gutters">
+					<div id="hint_panel" class="mt-2">
+						<div class="row" id="hint_header">
+							<div id="hint_icon"></div>
+							<div hideable><b>小提示:</b></div>
+							<div class="col offset-8 float-right"><a target="_blank" id="hint_wiki_link" href="#" hideable><u>ST Wiki</u></a></div>
+						</div>
+						<div hideable id="hint_body">	
+							<textarea id="hint_message" class="form-control" type="text" rows="6" readonly hint_edit="false">	
+							</textarea>
+							<textarea id="hint_edit_message" class="form-control" type="text" rows="6" hint_edit="true" hidden>	
+							</textarea>
+						</div>
+						<div class="row no-gutters mt-2" id="hint_footer" hideable>
+							<div class="col-8 row no-gutters">
+								<div id="hint_updater" hint_edit="false">Updater</div>
+								<span>&#160;&#160;</span>
+								<div id="hint_updated_time" hint_edit="false">9999/99/99 00:00:00</div>
+							</div>
+							<!--div class="col-1"><a id="hint_wiki_link" href="#" hideable>Wiki Link</a></div-->
+							<div class="col-3 offset-1">
+								<button class="btn btn-primary float-right" id="hint_editable" hint_edit="false">Edit</button>
+								<button class="btn btn-danger float-right" id="hint_edit_cancel" hint_edit="true" hidden>Cancel</button>
+								<button class="btn btn-success float-right" id="hint_edit_ok" hint_edit="true" hidden>OK</button>
+							</div>								
+						</div>							
+					</div>
+					<table>
+						<tr>
+							<td rowspan="2" session_title valign="top">Testcase</td>
+							<td rowspan="2">&#160;&#160;</td>
+							<td>
+								<a id="txt_tc_id" href="#" target="_blank" data-toggle="tooltip" data-placement="top" title=""></a>
+								<span>&#160;&#160;</span>
+								<span id="txt_legacy_id"></span>
+							</td>											
+						</tr>
+						<tr>
+							<td id="txt_tc_title"></td> 
+						</tr>
+					</table>					
+				</div>
+				
+				<!--div class="row no-gutters">
+					<div  session_title>Testcase</div>
+					<span>&#160;&#160;&#160;&#160;</span>
+					<div id="txt_test_title"></div>
+				</div-->
+				<div class="row no-gutters mt-2">
+					<div class="col-6">
+						<div class="row no-gutters">
+							<div session_title>測試步驟</div>
+							<span>&#160;&#160;&#160;&#160;</span>
+							<div id="tc_icons_panel">
+								<!--i tabindex="0" class="btn" id="btn_hint" data-toggle="modal" data-target="#test_hint_modal" data-placement="right" style="width:36px;height:36px;padding:3px;background-repeat:no-repeat"></i-->
+							</div>
+							<!--div style="padding-left:3px"><i id=test_icons_edit class=btn style="width:36px;height:36px;padding:3px;background-repeat:no-repeat;background-image:url('image/edit.png')"></i></div>-->
+						</div>
+						<div class="container-fluid mt-2" id="txt_test_procedure" style="padding-top: 0px;padding-bottom: 0px;text-align: left;font-size:18px">
+						</div>
+					</div>
+					<div class="col-6">					
+						<div class="row" session_title>預期結果</div>						
+						<div class="container-fluid mt-2" id="txt_expected_result" style="padding-top: 0px;padding-bottom: 0px;text-align: left;font-size:18px">
+						</div>										
+					</div>
+				</div>				
+				<div class="row col-12 no-gutters mt-9" id="bottom_panel">
+					<div>&#160;</div>
+				</div>			
+			</div>
+			<div class = "col-1" id="right_panel">
+				<div id="sticky_note">
+					<div class="row no-gutters">
+						<image src=./image/note.png></image>
+					</div>
+					<div class="row no-gutters">
+						<textarea class="textarea" type="text" id="txt_note"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- /.container -->
+		<input id="data_uid" type="hidden">
+		<input id="data_trid" type="hidden">
+		<input id="data_user_permission" type="hidden">	
+	</body>
+</html>

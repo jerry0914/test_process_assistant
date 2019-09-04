@@ -1,0 +1,51 @@
+.nav-tabs--vertical{
+    border-bottom: none;
+    border-right: 1px solid $color-border;
+    display:flex;
+    flex-flow:column nowrap;
+}
+
+ul li a{
+	font-size:2.4vh;
+	margin:3px;
+}
+
+.tab-content div{
+	margin:1px;
+}
+
+.form-check{
+	margin:2px
+}
+
+.form-check label{
+	margin:0px 5px 0px 0px;
+}
+
+#btn_tr_search{
+	margin:0px 6px 0px 6px;
+	height:32px;
+	width:32px;
+	background-image:url('../image/search.png');
+	background-repeat: no-repeat;
+	border-radius: 5px 5px 5px 5px;
+}
+
+#testrun_list option[active="1"]{
+	color:black;
+}
+
+#testrun_list option[active="0"]{
+	color:gray;
+}
+
+#txt_tr_finished_state{
+	width:100px;
+	border-width:1px;
+	border-style:solid;
+	margin:0px 0px 0px 12px;
+	text-align: center
+}
+
+
+

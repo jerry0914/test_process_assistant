@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="image/favicon.png">
+		<title>USI SW-ST Testing Process Assistant</title>
+		<!-- Bootstrap core CSS -->
+		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Bootstrap core JavaScript -->
+		<script src="vendor/jquery-3.3.1.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+		<!--Porrer 1.12.9 min -->
+		<script src="vendor/popper.js"></script>
+		<script src="vendor/tooltip.js"></script>
+		<!-- Custom styles for this template -->
+		<link href="css/logo-nav.css" rel="stylesheet">
+		<link href="css/testing_productivity.css" rel="stylesheet">
+		<script src="js/login.js"></script>
+		<script src="js/testing_productivity.js"></script>
+	</head>
+	
+	<body>
+		<!-- ============ Edit User Info Modal ============ -->
+		<div class="modal fade" id="modal_edit_user_info" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Edit User Information</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div style="padding-right:3px;padding-left:3px">Name: </div>
+						<div >
+							<input id="edit_user_info_fname" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="First name">
+							<input id="edit_user_info_lname" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="Last name">
+						</div>
+					</div>
+					<div class="row">
+						<div style="padding-right:3px;padding-left:3px">E-Mail: </div>
+						<input id="edit_user_info_email" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="E-Mail">
+						<div>@usiglobal.com</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_edit_user_info_ok">OK</button>
+					<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- ============ Edit User Info Modal ============ -->
+
+		<!-- ============ Change user password ============ -->
+		<div class="modal fade" id="modal_change_user_password" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Change password</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<table class="row col-12 no-gutters">
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">Current: </div></td>
+							<td><input id="change_user_password_current" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px"></td>
+						</tr>
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">New: </div></td>
+							<td><input id="change_user_password_new" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px"></td>
+						</tr>
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">Confirm: </div></td>
+							<td><input id="change_user_password_confirm" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" ></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><div id='change_user_password_message' hidden>Message of changing user password</div></td>
+						</tr>
+					</table>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="btn_change_user_password_ok">OK</button>
+					<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- ============ Change user password ============ -->
+		<!-- Navigation -->
+		<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+			<div class="navbar-nav container">
+				<li></li>
+				<li class="nav_item active"><a id="nav_link_home" class="nav-link" href="./index.html" hidden>Home</a></li>
+				<li class="nav_item active"><a id="nav_link_testrun" class="nav-link" href="#" hidden>Test Run</a></li>
+				<li class="nav-item dropdown active" id="nav_item_testmanagement">
+					<a id="nav_link_testmanagement" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" hidden>Test Management</a>
+					<ul class="dropdown-menu">
+						<a id="nav_link_testrun_import" class="dropdown-item" href="#" hidden>Import TestRun</a>
+						<a id="nav_link_testrun_management" class="dropdown-item" href="#" hidden>TestRun Management</a>
+						<a id="nav_link_testresult_review" class="dropdown-item" href="#" hidden>Test Result - Review</a>
+						<a id="nav_link_testing_productivity" class="dropdown-item" href="#" hidden>Testing productivity</a>
+					</ul>
+				</li>
+				<li class="nav-item dropdown active" id="nav_item_admin">
+					<a id="nav_link_admin" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" hidden>Administration</a>
+					<ul class="dropdown-menu" role="menu">
+						<a id="nav_link_user_management" class="dropdown-item" href="./user_management.html">User Management</a>
+					</ul>
+			    </li>
+				<!--li class="nav_item active"><a id="nav_link_admin" class="nav-link" href="#" hidden>Administration</a></li-->
+				<!-- Login Area -->
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown order-1">
+						<button type="button" id="dropdownMenu_login" data-toggle="dropdown" class="btn btn-outline-primary dropdown-toggle">Login<span class="caret"></span></button>
+						<ul class="dropdown-menu dropdown-menu-right" style="width:300px">
+						   <li class="px-3 py-2">
+								<div id="div_user_account" class="form-group row no-gutters">
+									<input class="col-7" id="user_account" placeholder="Account" class="form-control form-control-sm" type="text" required="">
+									<div class="col-5">@usiglobal.com</div>
+								</div>
+								<div id="div_user_password" class="form-group">
+									<input id="user_password" placeholder="Password" class="form-control form-control-sm" type="password">
+								</div>
+								
+								<div class="message form-group" id="login_msg" style="color: #FF0000;font-weight: bold;text-align:left;width: 100%;"></div>
+								<div class="form-group row no-gutters">
+									<div id="edit_user_info" class='col-2' hidden>
+										<small><a href="#" data-toggle="modal" data-target="#modal_edit_user_info" onclick="send_req_get_user_info()">Edit</a></small>
+									</div>
+									<div id="change_user_password" data-toggle="modal" data-target="#modal_change_user_password" hidden>
+										<small><a href="#">Change password</a></small>
+									</div>
+							    </div>								
+								<div class="form-group">
+									<button id="btn_login" class="btn btn-primary btn-block">Login</button>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<!-- Login Area -->
+				<li></li>
+			</div>
+		</nav>
+		<!-- Navigation -->
+		<div class="row col-4 no-gutters mt-2 offset-5"><h4>Testing productivity table</h4></div>
+		<div class="row no-gutters st-1">
+			<div class="offset-3">請設定查詢區間:</div>
+			<div><input id='testing_ouput_date_begin' type="date"></div>
+			<div> ~ </div>
+			<div><input id='testing_ouput_date_end' type="date"></div>
+			<div><button id='testing_ouput_date_query' class='btn-outline-primary' >Query</button></div>
+			<div><input id="testing_ouput_workdays" type="text" readonly style="border:0px"></div>
+		</div>
+		<div class="row no-gutters mt-3">
+			<div class="col-4 offset-1 no-gutters">				
+				<table id="all_users_output_table">
+					<thead>
+						<th style="width:55%">Tester</th>
+						<th>Output</th>
+						<th>Avg.</th>
+					<thead>
+					<tbody>
+
+					</tbody>
+				</table>			
+			</div>
+			<div class="col-6 offset-1 no-gutters">
+					<table id="individual_output_table">
+						<thead>
+							<th style="width:90%">TestRun</th>
+							<th>Output</th>
+						<thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+			</div>
+		</div>
+    </body>
+</html>

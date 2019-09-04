@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="image/favicon.png">
+		<title>USI SW-ST Testing Process Assistant</title>
+		<!-- Bootstrap core CSS -->
+		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Bootstrap core JavaScript -->
+		<script src="vendor/jquery-3.3.1.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+		<!--Porrer 1.12.9 min -->
+		<script src="vendor/popper.js"></script>
+		<script src="vendor/tooltip.js"></script>
+		<!-- Custom styles for this template -->
+		<link href="css/logo-nav.css" rel="stylesheet">
+		<script src="js/login.js"></script>
+		<script src="js/testresult_review.js"></script>
+		<link href="css/testresult_review.css" rel="stylesheet">
+	</head>
+	<body>
+		<!-- Start: Dialogs -->
+		<!-- Verdict Dialog -->
+		<div class="row no-gutters dialog" id="verdictDialog">
+			<select style="width:75%;margin:3px 3px 3px 3px">
+				<option value="Passed">P</option>
+				<option value="Failed">F</option>
+				<option value="Blocked">B</option>
+				<option value="Exempted">E</option>
+				<option value="Indeterminate">I</option>
+			</select>
+			<span class="close">&times;</span>
+		</div>
+		<!-- Comment Dialog -->
+		<div class="dialog" id="commentDialog">
+			<div class="row no-gutters mt-1" style="width:100%;height:240px">
+				<textarea id="txt_edited_comment" type="text" style="width:100%;height:100%;margin:3px 3px 3px 3px;"></textarea>
+			</div>
+			<div class="row no-gutters mt-1" style="height:40px" style="align">
+				<button class="col-2 btn btn-outline-success">OK</button>
+				<button class="col-2 btn btn-outline-danger">Canel</button>
+			</div>
+		</div>
+		<!-- End: Dialogs -->
+		<!-- ============ Edit User Info Modal ============ -->
+		<div class="modal fade" id="modal_edit_user_info" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Edit User Information</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div style="padding-right:3px;padding-left:3px">Name: </div>
+						<div >
+							<input id="edit_user_info_fname" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="First name">
+							<input id="edit_user_info_lname" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="Last name">
+						</div>
+					</div>
+					<div class="row">
+						<div style="padding-right:3px;padding-left:3px">E-Mail: </div>
+						<input id="edit_user_info_email" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="E-Mail">
+						<div>@usiglobal.com</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_edit_user_info_ok">OK</button>
+					<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- ============ Edit User Info Modal ============ -->
+
+		<!-- ============ Change user password ============ -->
+		<div class="modal fade" id="modal_change_user_password" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Change password</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<table class="row col-12 no-gutters">
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">Current: </div></td>
+							<td><input id="change_user_password_current" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px"></td>
+						</tr>
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">New: </div></td>
+							<td><input id="change_user_password_new" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px"></td>
+						</tr>
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">Confirm: </div></td>
+							<td><input id="change_user_password_confirm" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" ></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><div id='change_user_password_message' hidden>Message of changing user password</div></td>
+						</tr>
+					</table>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="btn_change_user_password_ok">OK</button>
+					<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- ============ Change user password ============ -->
+
+		<!-- Navigation -->
+		<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+			<div class="navbar-nav container">
+				<li></li>
+				<li class="nav_item active"><a id="nav_link_home" class="nav-link" href="./index.html" hidden>Home</a></li>
+				<li class="nav_item active"><a id="nav_link_testrun" class="nav-link" href="#" hidden>Test Run</a></li>
+				<li class="nav-item dropdown active" id="nav_item_testmanagement">
+					<a id="nav_link_testmanagement" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" hidden>Test Management</a>
+					<ul class="dropdown-menu">
+						<a id="nav_link_testrun_import" class="dropdown-item" href="#" hidden>Import TestRun</a>
+						<a id="nav_link_testrun_management" class="dropdown-item" href="#" hidden>TestRun Management</a>
+						<a id="nav_link_testresult_review" class="dropdown-item" href="#" hidden>Test Result - Review</a>
+						<a id="nav_link_testing_productivity" class="dropdown-item" href="#" hidden>Testing productivity</a>
+					</ul>
+				</li>
+				<li class="nav-item dropdown active" id="nav_item_admin">
+					<a id="nav_link_admin" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" hidden>Administration</a>
+					<ul class="dropdown-menu" role="menu">
+						<a id="nav_link_user_management" class="dropdown-item" href="./user_management.html">User Management</a>
+					</ul>
+			    </li>
+				<!--li class="nav_item active"><a id="nav_link_admin" class="nav-link" href="#" hidden>Administration</a></li-->
+				<!-- Login Area -->
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown order-1">
+						<button type="button" id="dropdownMenu_login" data-toggle="dropdown" class="btn btn-outline-primary dropdown-toggle">Login<span class="caret"></span></button>
+						<ul class="dropdown-menu dropdown-menu-right" style="width:300px">
+						   <li class="px-3 py-2">
+								<div id="div_user_account" class="form-group row no-gutters">
+									<input class="col-7" id="user_account" placeholder="Account" class="form-control form-control-sm" type="text" required="">
+									<div class="col-5">@usiglobal.com</div>
+								</div>
+								<div id="div_user_password" class="form-group">
+									<input id="user_password" placeholder="Password" class="form-control form-control-sm" type="password">
+								</div>
+								
+								<div class="message form-group" id="login_msg" style="color: #FF0000;font-weight: bold;text-align:left;width: 100%;"></div>
+								<div class="form-group row no-gutters">
+									<div id="edit_user_info" class='col-2' hidden>
+										<small><a href="#" data-toggle="modal" data-target="#modal_edit_user_info" onclick="send_req_get_user_info()">Edit</a></small>
+									</div>
+									<div id="change_user_password" data-toggle="modal" data-target="#modal_change_user_password" hidden>
+										<small><a href="#">Change password</a></small>
+									</div>
+							    </div>								
+								<div class="form-group">
+									<button id="btn_login" class="btn btn-primary btn-block">Login</button>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<!-- Login Area -->
+				<li></li>
+			</div>
+		</nav>
+		<!-- Navigation -->
+		<div>
+			<div class="row col no-gutters" id="top_panel" >
+				<button class="btn btn-small btn-outline-warning" id="toggle_left_panel"></button>
+				<div class="row col no-gutters">
+					<b style="margin:0px 12px 0px 12px;font-size:20px;color:royalblue;vertical-align:middle; ">TestRun:</b>
+					<select type="text" id="testrun_list" style="margin:0px 12px 0px 24px;font-size:16px"></select>
+					<button id="btn_add_tr_to_list" class="btn btn-success" style="margin:0px 12px 0px 0px;" disabled>Select</button>
+					<div class="row form-check" style="margin:6px 0px 0px 6px;font-size:14px;color:black;">
+						<input type="checkbox" class="form-check-input" id="ckb_show_inactive_tr">
+						<label class="form-check-label" for="ckb_show_inactive_tr">Show all?</label>
+					</div>
+				</div>
+				<div class="row" id="searching_panel" style="background-color:royalblue;margin: 0px 24px 0px 0px">
+					<button id="btn_search_replace_toggle" style="width:30px;height:30px;margin: 6px 6px 6px 6px">+</button>
+					<div class="col">
+						<div class="row">
+							<input type="text" id="search_text" style="margin: 6px 6px 6px 6px">
+							<button id="btn_find_previous" style="margin: 6px 1px 6px 6px" searching_toggle disabled><<</button>
+							<button id="btn_find_next" style="margin: 6px 6px 6px 1px" searching_toggle disabled>>></button>
+							<button id="btn_search_col" style="margin: 6px 6px 6px 6px" searching_toggle disabled>Find All</button>			
+						</div>
+						<div class="row" id="replace_row" hidden>
+							<input type="text" id="replac_text" style="margin: 6px 6px 6px 6px">
+							<button id="btn_replace" style="margin: 6px 1px 6px 6px" searching_toggle disabled>Replace</button>
+							<button id="btn_replace_all" style="margin: 6px 6px 6px 6px" searching_toggle disabled>Replace All</button>
+						</div>
+					</div>
+				</div>
+				<button style="margin: 0px 24px 0px 0px" id="btn_save_edited_result" class="btn btn-small btn-danger" hidden>Save</button>			
+			</div>
+			<div class="row no-gutters mt-2">
+				<div id="left_panel">
+					<p style="margin:0px 6px 0px 6px;font-size:20px;color:royalblue;">Selected testrun(s):</p>										
+					<div id="pane_selected_tr" class="pane">	
+						<table id="table_selected_testrun">
+							<thead>
+								<tr>
+									<td col="tr_name">TestRun</td>
+									<td col="tr_remove">X</td>
+								</tr>
+							</thead>
+							<tbody>						
+							</tbody>
+						</table>
+						<div style="text-align:right;margin:0px 12px 0px 12px"><a  href="#" id="multiple_testrun_overview" hidden>TestRun overview</a></div>
+					</div>
+					<div class="mt-2" style="margin:0px 6px 0px 6px;font-size:20px;color:royalblue;">Testcase ID(TcID):</div>
+					<input style="margin:0px 12px 0px 12px;width:80%" id="search_testresult_tcid" placeholder='TcID1,TcID2,...; OR keep blank for all testcases'>
+
+					<div class="text-left mt-2" style="margin:0px 6px 0px 6px;font-size:20px;color:royalblue;">Result:</div>
+					<div class="align-items-left mt-1 offset-3 no-gutters">
+						<div class="row">
+							<input type="checkbox" value="Passed" class="form-check-input" name="filter_verdicts" id="filter_verdict_pass" checked>
+							<label class="form-check-label" for="filter_verdict_pass">Passed</label>
+						</div>
+						<div class="row">
+							<input type="checkbox" value="Failed" class="form-check-input"  name="filter_verdicts" id="filter_verdict_fail" checked>
+							<label class="form-check-label" for="filter_verdict_fail">Failed</label>
+						</div>
+						<div class="row">
+							<input type="checkbox" value="Blocked" class="form-check-input"  name="filter_verdicts" id="filter_verdict_block" checked>
+							<label class="form-check-label" for="filter_verdict_block">Blocked</label>
+						</div>
+						<div class="row">
+							<input type="checkbox" value="Exempted" class="form-check-input" name="filter_verdicts" id="filter_verdict_exemption" checked>
+							<label class="form-check-label" for="filter_verdict_exemption">Exempted</label>
+						</div>
+						<div class="row">
+							<input type="checkbox" value="Indeterminate" class="form-check-input" name="filter_verdicts" id="filter_verdict_indeterminate" checked>
+							<label class="form-check-label" for="filter_verdict_indeterminate">Indeterminate</label>
+						</div>						
+					</div>
+					<div class="mt-2" style="margin:0px 6px 0px 6px;font-size:20px;color:royalblue;">Comment(s):</div>
+					<input style="margin:0px 12px 0px 12px;width:80%" id="search_testresult_comment" placeholder='"ALL" for all test-result with comments'>
+
+					<button id="btn_tr_review_query" class="btn btn-outline-primary mt-3" style="margin:0px 12px 0px 12px;width:90%" disabled>Query</button>
+				</div>
+				<div id="centrial_panel" style="overflow:auto">
+					<table id="table_testresult_review">
+						<thead>
+							<tr>
+								<th col="testrun">TestRun</th>
+								<th col="tcid">TcID</th>	
+								<th col="verdict">Verdict</th>
+								<th col="comment">Comment</th>
+								<th col="attachment">Att...</th>
+								<th col="tester">Tester</th>
+							</tr>
+						</thead>
+						<tbody>						
+						</tbody>
+					</table>										
+				</div>
+			</div>
+		</div>
+		<input id="data_uid" type="hidden">
+	</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="image/favicon.png">
+		<title>USI SW-ST Testing Process Assistant</title>
+		<!-- Bootstrap core CSS -->
+		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Bootstrap core JavaScript -->
+		<script src="vendor/jquery-3.3.1.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+		<!--Porrer 1.12.9 min -->
+		<script src="vendor/popper.js"></script>
+		<script src="vendor/tooltip.js"></script>
+		<!-- Custom styles for this template -->
+		<link href="css/logo-nav.css" rel="stylesheet">
+		<script src="js/login.js"></script>
+		<script src="js/testrun_selector.js"></script>
+		<!--script src="js/testrun.js"></script-->
+		<link href="css/testrun_selector.css" rel="stylesheet">
+	</head>
+	<body>
+		<!-- ============ Edit User Info Modal ============ -->
+		<div class="modal fade" id="modal_edit_user_info" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Edit User Information</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div style="padding-right:3px;padding-left:3px">Name: </div>
+						<div >
+							<input id="edit_user_info_fname" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="First name">
+							<input id="edit_user_info_lname" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="Last name">
+						</div>
+					</div>
+					<div class="row">
+						<div style="padding-right:3px;padding-left:3px">E-Mail: </div>
+						<input id="edit_user_info_email" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="E-Mail">
+						<div>@usiglobal.com</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_edit_user_info_ok">OK</button>
+					<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- ============ Edit User Info Modal ============ -->
+
+		<!-- ============ Change user password ============ -->
+		<div class="modal fade" id="modal_change_user_password" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Change password</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<table class="row col-12 no-gutters">
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">Current: </div></td>
+							<td><input id="change_user_password_current" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px"></td>
+						</tr>
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">New: </div></td>
+							<td><input id="change_user_password_new" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px"></td>
+						</tr>
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">Confirm: </div></td>
+							<td><input id="change_user_password_confirm" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" ></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><div id='change_user_password_message' hidden>Message of changing user password</div></td>
+						</tr>
+					</table>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="btn_change_user_password_ok">OK</button>
+					<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- ============ Change user password ============ -->
+   		<!-- Navigation -->
+		<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+			<div class="navbar-nav container">
+				<li></li>
+				<li class="nav_item active"><a id="nav_link_home" class="nav-link" href="./index.html" hidden>Home</a></li>
+				<li class="nav_item active"><a id="nav_link_testrun" class="nav-link" href="#" hidden>Test Run</a></li>
+				<li class="nav-item dropdown active" id="nav_item_testmanagement">
+					<a id="nav_link_testmanagement" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" hidden>Test Management</a>
+					<ul class="dropdown-menu">
+						<a id="nav_link_testrun_import" class="dropdown-item" href="#" hidden>Import TestRun</a>
+						<a id="nav_link_testrun_management" class="dropdown-item" href="#" hidden>TestRun Management</a>
+						<a id="nav_link_testresult_review" class="dropdown-item" href="#" hidden>Test Result - Review</a>
+						<a id="nav_link_testing_productivity" class="dropdown-item" href="#" hidden>Testing productivity</a>
+					</ul>
+				</li>
+				<li class="nav-item dropdown active" id="nav_item_admin">
+					<a id="nav_link_admin" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" hidden>Administration</a>
+					<ul class="dropdown-menu" role="menu">
+						<a id="nav_link_user_management" class="dropdown-item" href="./user_management.html">User Management</a>
+					</ul>
+			    </li>
+				<!--li class="nav_item active"><a id="nav_link_admin" class="nav-link" href="#" hidden>Administration</a></li-->
+				<!-- Login Area -->
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown order-1">
+						<button type="button" id="dropdownMenu_login" data-toggle="dropdown" class="btn btn-outline-primary dropdown-toggle">Login<span class="caret"></span></button>
+						<ul class="dropdown-menu dropdown-menu-right" style="width:300px">
+						   <li class="px-3 py-2">
+								<div id="div_user_account" class="form-group row no-gutters">
+									<input class="col-7" id="user_account" placeholder="Account" class="form-control form-control-sm" type="text" required="">
+									<div class="col-5">@usiglobal.com</div>
+								</div>
+								<div id="div_user_password" class="form-group">
+									<input id="user_password" placeholder="Password" class="form-control form-control-sm" type="password">
+								</div>
+								
+								<div class="message form-group" id="login_msg" style="color: #FF0000;font-weight: bold;text-align:left;width: 100%;"></div>
+								<div class="form-group row no-gutters">
+									<div id="edit_user_info" class='col-2' hidden>
+										<small><a href="#" data-toggle="modal" data-target="#modal_edit_user_info" onclick="send_req_get_user_info()">Edit</a></small>
+									</div>
+									<div id="change_user_password" data-toggle="modal" data-target="#modal_change_user_password" hidden>
+										<small><a href="#">Change password</a></small>
+									</div>
+							    </div>								
+								<div class="form-group">
+									<button id="btn_login" class="btn btn-primary btn-block">Login</button>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<!-- Login Area -->
+				<li></li>
+			</div>
+		</nav>
+		<!-- Navigation -->
+		<!-- Page Content -->
+		<div class="row no-gutters">
+			<!-- Test Run -->
+			<div class="row align-items-center no-gutters">
+				<div style="margin:0px 12px 0px 12px;color:royalblue;font-style:italic;font-weight:bold;">Test Run:</div>
+				<select class="col form-control" id="filter_tesrun"></select>
+			</div>
+			<div class="row col-12 mt-3">
+				<div class="col-4" id="filter_panel">
+					<nav class="mt-3 col">
+						<div class="nav nav-tabs" id="nav-tab" role="tablist">
+							<a class="nav-item nav-link active" id="filter_tab" data-toggle="tab" href="#filters_page" role="tab" aria-controls="filters_page" aria-selected="true">Filters</a>
+							<a class="nav-item nav-link" id="search_tab" data-toggle="tab" href="#search_page" role="tab" aria-controls="search_page" aria-selected="false" >Search</a>
+						</div>
+					</nav>
+					<div class="tab-content col" id="nav-tabContent">
+						<div class="tab-pane fade active show" id="filters_page"  role="tabpanel" aria-labelledby="filter_tab">
+							<br />
+						 	<!-- Document -->
+							<div class="row align-items-center">
+								<div class="col-4 text-left">Document:</div>
+								<select class="col form-control" id="filter_document">
+								</select>
+							</div>
+							<div class="row align-items-left mt-4 no-gutters">
+								<div class="col-4 text-left">Result:</div>
+								<div class="col">
+									<input type="checkbox" value="P" class="form-check-input" name="filter_verdicts" id="filter_verdict_pass">
+									<label class="form-check-label" for="filter_verdict_pass">Passed</label>
+								</div>
+								<div class="row offset-4">
+									<input type="checkbox" value="F" class="form-check-input"  name="filter_verdicts" id="filter_verdict_fail" checked>
+									<label class="form-check-label" for="filter_verdict_fail">Failed</label>
+								</div>
+								<div class="row offset-4">
+									<input type="checkbox" value="B" class="form-check-input"  name="filter_verdicts" id="filter_verdict_block" checked>
+									<label class="form-check-label" for="filter_verdict_block">Blocked</label>
+								</div>
+								<div class="row offset-4">
+									<input type="checkbox" value="E" class="form-check-input" name="filter_verdicts" id="filter_verdict_exemption" checked>
+									<label class="form-check-label" for="filter_verdict_exemption">Exempted</label>
+								</div>
+								<div class="row offset-4">
+									<input type="checkbox" value="I" class="form-check-input" name="filter_verdicts" id="filter_verdict_indeterminate" checked>
+									<label class="form-check-label" for="filter_verdict_indeterminate">Indeterminate</label>
+								</div>								
+								<div class="row offset-4">
+									<input type="checkbox" value="N" class="form-check-input" name="filter_verdicts" id="filter_verdict_none" checked>
+									<label class="form-check-label" for="filter_verdict_none">None</label>
+								</div>							
+							</div>						
+							<div class="mt-4">其他篩選條件:</div>
+							<div class="col-11 mt-2" style="border:1px;border-style:solid;">	
+								<div class="row align-items-left mt-3">
+									<div class="col text-left">Automated:</div>
+									<div class="col-8 row">
+										<div class="col">
+											<input type="checkbox" Value="A" class="form-check-input" name="filter_auto" id="ckbAutomated">
+											<label class="form-check-label" for="ckbAutomated">A</label>
+										</div>
+										<div class="col">
+											<input type="checkbox" value="S" class="form-check-input"  name="filter_auto" id="ckbSemi_Auto" checked>
+											<label class="form-check-label" for="ckbSemi_Auto">S/A</label>
+										</div>
+										<div class="col">
+											<input type="checkbox" value="N" class="form-check-input"  name="filter_auto" id="ckbNon_Auto" checked>
+											<label class="form-check-label" for="ckbNon_Auto">None</label>
+										</div>
+									</div>
+								</div>
+								<div class="row align-items-left mt-3" style="margin:0 0 6 0;">
+									<span class="col-3 text-left">Tags:</span>
+									<div class="input-group row col">							
+										<input class="col-9" id="filter_tags" type="text" placeholder="Click button to select..." readonly>
+										<div class="input-group-btn">
+											<button tabindex="-1" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" id="btn_tag_selector">
+											<span class="caret"></span>
+											</button>
+											<ul id="ddm_tags_list" class="dropdown-menu">
+												<li>
+													<label class="dropdown-menu-item">
+														<!--input type="checkbox"-->
+														 <span></span>-- No data --
+													</label>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<br />
+							</div>
+							<div class="row align-items-left no-gutters mt-4">
+								<button class="col-10 offset-1 btn btn-success" id="btn_tr_select_submit">OK</button>
+							</div>
+							<br/>
+						</div>
+						<div class="tab-pane fade" id="search_page" role="tabpanel" aria-labelledby="search_tab">
+							<br />
+							<!--div class="row align-items-center">
+								<div class="col">TCID:</div>
+								<input class="col-8 form-control" id="search_ID" type="text" placeholder="Testcase ID">
+							</div-->
+							<div class="row align-items-center">
+								<div class="col">Keywords:</div>
+								<input class="col-8 form-control" id="search_Keywords" type="text" placeholder="Searching the fields contain keywrods...">
+							</div>
+							<div class="row offset-4 mt-1">
+								<input type="checkbox" value="_TcID" class="form-check-input" name="searching_columns" id="search_col_tcid" checked>
+								<label class="form-check-label" for="search_col_tcid">ID</label>
+							</div>
+							<div class="row offset-4 mt-1">
+								<input type="checkbox" value="_Title" class="form-check-input" name="searching_columns" id="search_col_title" checked>
+								<label class="form-check-label" for="search_col_title">Title</label>
+							</div>								
+							<div class="row offset-4">
+								<input type="checkbox" value="_Procedure" class="form-check-input" name="searching_columns" id="search_col_procedure">
+								<label class="form-check-label" for="search_col_procedure">Procedure</label>
+							</div>	
+							<div class="row offset-4">
+								<input type="checkbox" value="_ExpectedResult" class="form-check-input" name="searching_columns" id="search_col_exp_result">
+								<label class="form-check-label" for="search_col_exp_result">Expected Result</label>
+							</div>
+							<div class="row offset-4">
+								<input type="checkbox" value="_Comment" class="form-check-input" name="searching_columns" id="search_col_comment">
+								<label class="form-check-label" for="search_col_comment">Comment</label>
+							</div>	
+							<div class="row offset-4">
+								<input type="checkbox" value="_Note" class="form-check-input" name="searching_columns" id="search_col_note">
+								<label class="form-check-label" for="search_col_note">Note</label>
+							</div>
+							<!--div class="row align-items-center mt-4">
+								<div class="col text-left">Title:</div>
+								<input class="col-8 form-control" id="search_Title" type="text" placeholder="Title contains...">
+							</div>
+							<div class="row align-items-center mt-4">
+								<div class="col text-left">Comment:</div>
+								<input class="col-8 form-control" id="search_Comment" type="text" placeholder="Comment (of verdict) contains...">
+							</div>
+							<div class="row align-items-center mt-4">
+								<div class="col text-left">Note:</div>
+								<input class="col-8 form-control" id="search_Note" type="text" placeholder='Notes contains..., or "ALL" for all notes'>
+							</div-->
+
+							<div class="row align-items-left no-gutters mt-4">
+								<button class="col-10 offset-1 btn btn-primary" id="btn_search">Search</button>
+							</div>
+							<br/>
+						</div>
+					</div>
+				</div>			
+				<table id="table_tr_overview" class="col-8" hidden="">
+					<thead>
+						<th col_grp="Title">Document</th>
+						<th col_grp="All">總數</th>
+						<th col_grp="P,F,B,E,I">已測</th>
+						<th col_grp="N">未測</th>
+						<th col_grp="P">P</th>
+						<th col_grp="F">F</th>
+						<th col_grp="B">B</th>
+						<th col_grp="E">E</th>
+						<th col_grp="I">I</th>
+					</thead>
+				</table>
+			</div>
+		</div>    
+		<!-- /.container -->
+		<input id="data_uid" type="hidden">
+		<input id="data_user_permission" type="hidden">	
+	</body>
+</html>

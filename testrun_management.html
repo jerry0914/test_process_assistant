@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="image/favicon.png">
+		<title>USI SW-ST Testing Process Assistant</title>
+		<!-- Bootstrap core CSS -->
+		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Bootstrap core JavaScript -->
+		<script src="vendor/jquery-3.3.1.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+		<!--Porrer 1.12.9 min -->
+		<script src="vendor/popper.js"></script>
+		<script src="vendor/tooltip.js"></script>
+		<!-- Custom styles for this template -->
+		<link href="css/logo-nav.css" rel="stylesheet">
+		<link href="css/testrun_management.css" rel="stylesheet">
+		<script src="js/login.js"></script>
+		<script src="js/testrun_management.js"></script>
+	</head>
+	<body>
+		<!-- ************ Modals ************ -->
+		<!-- ============ Upload TRS Modal ============ -->
+		<div class="modal fade" id="modal_upload_files" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Upload Files</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		      		<a style="margin:3px">Select Files(s):</a>
+		        	<input type="file" id="upload_files" multiple accept=".xls,.xlsx">
+		        	<div class="offset-2" id="upload_modal_response_msg"></div>    
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" id="btn_upload_files">Upload</button>
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- ============ Upload TRS Modal ============ -->
+		<!-- ============ Edit User Info Modal ============ -->
+		<div class="modal fade" id="modal_edit_user_info" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Edit User Information</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div style="padding-right:3px;padding-left:3px">Name: </div>
+						<div >
+							<input id="edit_user_info_fname" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="First name">
+							<input id="edit_user_info_lname" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="Last name">
+						</div>
+					</div>
+					<div class="row">
+						<div style="padding-right:3px;padding-left:3px">E-Mail: </div>
+						<input id="edit_user_info_email" style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" placeholder="E-Mail">
+						<div>@usiglobal.com</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_edit_user_info_ok">OK</button>
+					<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- ============ Edit User Info Modal ============ -->
+
+		<!-- ============ Change user password ============ -->
+		<div class="modal fade" id="modal_change_user_password" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Change password</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<table class="row col-12 no-gutters">
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">Current: </div></td>
+							<td><input id="change_user_password_current" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px"></td>
+						</tr>
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">New: </div></td>
+							<td><input id="change_user_password_new" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px"></td>
+						</tr>
+						<tr>
+							<td><div style="padding-right:3px;padding-left:3px">Confirm: </div></td>
+							<td><input id="change_user_password_confirm" type='password' style="border:0;outline:0;background:transparent;border-bottom:1px dotted black;padding-left:3px;padding-right:3px" ></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><div id='change_user_password_message' hidden>Message of changing user password</div></td>
+						</tr>
+					</table>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="btn_change_user_password_ok">OK</button>
+					<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- ============ Change user password ============ -->
+		<!-- ************ Modals ************ -->
+		<!-- Navigation -->
+		<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+			<div class="navbar-nav container">
+				<li></li>
+				<li class="nav_item active"><a id="nav_link_home" class="nav-link" href="./index.html" hidden>Home</a></li>
+				<li class="nav_item active"><a id="nav_link_testrun" class="nav-link" href="#" hidden>Test Run</a></li>
+				<li class="nav-item dropdown active" id="nav_item_testmanagement">
+					<a id="nav_link_testmanagement" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" hidden>Test Management</a>
+					<ul class="dropdown-menu">
+						<a id="nav_link_testrun_import" class="dropdown-item" href="#" hidden>Import TestRun</a>
+						<a id="nav_link_testrun_management" class="dropdown-item" href="#" hidden>TestRun Management</a>
+						<a id="nav_link_testresult_review" class="dropdown-item" href="#" hidden>Test Result - Review</a>
+						<a id="nav_link_testing_productivity" class="dropdown-item" href="#" hidden>Testing productivity</a>
+					</ul>
+				</li>
+				<li class="nav-item dropdown active" id="nav_item_admin">
+					<a id="nav_link_admin" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" hidden>Administration</a>
+					<ul class="dropdown-menu" role="menu">
+						<a id="nav_link_user_management" class="dropdown-item" href="./user_management.html">User Management</a>
+					</ul>
+			    </li>
+				<!--li class="nav_item active"><a id="nav_link_admin" class="nav-link" href="#" hidden>Administration</a></li-->
+				<!-- Login Area -->
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown order-1">
+						<button type="button" id="dropdownMenu_login" data-toggle="dropdown" class="btn btn-outline-primary dropdown-toggle">Login<span class="caret"></span></button>
+						<ul class="dropdown-menu dropdown-menu-right" style="width:300px">
+						   <li class="px-3 py-2">
+								<div id="div_user_account" class="form-group row no-gutters">
+									<input class="col-7" id="user_account" placeholder="Account" class="form-control form-control-sm" type="text" required="">
+									<div class="col-5">@usiglobal.com</div>
+								</div>
+								<div id="div_user_password" class="form-group">
+									<input id="user_password" placeholder="Password" class="form-control form-control-sm" type="password">
+								</div>
+								
+								<div class="message form-group" id="login_msg" style="color: #FF0000;font-weight: bold;text-align:left;width: 100%;"></div>
+								<div class="form-group row no-gutters">
+									<div id="edit_user_info" class='col-2' hidden>
+										<small><a href="#" data-toggle="modal" data-target="#modal_edit_user_info" onclick="send_req_get_user_info()">Edit</a></small>
+									</div>
+									<div id="change_user_password" data-toggle="modal" data-target="#modal_change_user_password" hidden>
+										<small><a href="#">Change password</a></small>
+									</div>
+							    </div>								
+								<div class="form-group">
+									<button id="btn_login" class="btn btn-primary btn-block">Login</button>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<!-- Login Area -->
+				<li></li>
+			</div>
+		</nav>
+		<!-- Navigation -->
+		<div class="row mt-2 no-gutters">
+			<!--div class="col-1" id="left_panel"></div-->
+			<div class="col" id="central_panel">
+				<div class="row no-gutters offset-3" style="font-size:20px;color:royalblue;">
+					<b style="margin:0px 12px 0px 0px">TestRun :</b>
+					<!--span>&nbsp&nbsp&nbsp&nbsp</span-->
+					<div class="row">
+						<select type="text" id="testrun_list" style="margin:0px 12px 0px 12px;font-size:16px"></select>
+						<div class="form-check" style="margin:0px 0px 0px 12px;font-size:14px;color:black;">
+							<input type="checkbox" class="form-check-input" id="ckb_show_inactive_tr">
+							<label class="form-check-label" for="ckb_show_inactive_tr">Show finished TestRun(s)</label>
+						</div>	
+					</div>
+					<button class="btn-small btn-primary" id="btn_tr_search" hidden></button>		
+				</div>
+				
+				<div class="d-flex flex-row mt-4 row no-gutters">
+					<ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left col-2" role="navigation">
+						<li class="nav-item">
+							<a id="export_trs_tab" href="#export_trs_tab_page" class="nav-link active" data-toggle="tab" role="tab" aria-controls="export_trs_tab_page">Export TRS</a>
+						</li>
+						<li class="nav-item">
+							<a id="import_verdict_tab" href="#import_verdict_page" class="nav-link" data-toggle="tab" role="tab" aria-controls="import_verdict_page">Import tested result </a>
+						</li>
+						<li class="nav-item">
+							<a id="add_tc_tab" href="#add_tc_tab_page" class="nav-link" data-toggle="tab" role="tab" aria-controls="add_tc_tab_page" hidden>Add testcases</a>
+						</li>
+						<li class="nav-item">
+							<a id="manage_tr_tab" href="#manage_tr_tab_page" class="nav-link" data-toggle="tab" role="tab" aria-controls="manage_tr_tab_page" hidden>Manage TestRun</a>
+						</li>
+					</ul>
+					<div class="tab-content col-5 offset-1">
+						<div class="tab-pane fade show active" id="export_trs_tab_page" role="tabpanel">
+							<div class="row">
+								<div style="margin:0px 12px 0px 0px">Document:</div>
+								<select type="text" id="document_list"></select>
+							</div>
+							<div class="row mt-4">
+								<div style="margin:0px 12px 0px 0px">測試者:</div>
+								<div class="col"><select type="text" id="export_trs_filter_tester"></select></div>
+							</div>
+							<div class="row mt-4">
+								<div>測試結果:</div>
+								<div class="row" style="margin:2px 6px">				
+									<div class="row col" style="margin:2px 6px">
+										<div class="form-check">
+											<input type="checkbox" name="ckb_export_trs_verdicts" class="form-check-input" id="ckb_export_trs_verdict_P" value="P">
+											<label class="form-check-label" for="ckb_export_trs_verdict_P">P</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" name="ckb_export_trs_verdicts" class="form-check-input" id="ckb_export_trs_verdict_F" value="F">
+											<label class="form-check-label" for="ckb_export_trs_verdict_F">F</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" name="ckb_export_trs_verdicts" class="form-check-input" id="ckb_export_trs_verdict_B" value="B">
+											<label class="form-check-label" for="ckb_export_trs_verdict_B">B</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" name="ckb_export_trs_verdicts" class="form-check-input" id="ckb_export_trs_verdict_E" value="E">
+											<label class="form-check-label" for="ckb_export_trs_verdict_E">E</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" name="ckb_export_trs_verdicts" class="form-check-input" id="ckb_export_trs_verdict_I" value="I">
+											<label class="form-check-label" for="ckb_export_trs_verdict_I">I</label>
+										</div>
+									</div>
+									<button style="margin:2px 6px" id="btn_export_trs_verdict_ALL" class="btn-small btn-secondary">Select ALL</button>			
+								</div>
+							</div>
+							<div class="row mt-4">
+								<div>匯出檔案 / (挑選 或 上傳):</div>
+								<select type="text" id="export_trs_file" class="col" style="margin:2px 6px"></select>
+								<button class="btn-small btn-secondary" id="btn_upload_trs_popup" data-toggle="modal" data-target="#modal_upload_files" style="margin:2px 6px">Upload</button>
+							</div>
+							<div class="offset-3 row mt-5">
+								<button class="btn btn-outline-primary col-6 offset-2" id="btn_export_trs_start">Export</button>
+								<div class="form-check" style="margin:6px 12px 6px 12px" id="div_tr_finished" hidden>
+									<input type="checkbox" class="form-check-input" id="ckb_set_tr_finished">
+									<label class="form-check-label" for="ckb_set_tr_finished">Finished?</label>
+								</div>
+							</div>								
+						</div>
+						<div class="tab-pane fade" id="import_verdict_page" role="tabpanel">
+							<div class="row mt-4">
+								<div> File(s): </div>
+								<div class="col"><input id="import_verdict_files" type="file" multiple accept=".xls,.xlsx" /></div>
+							</div>
+							<button class="btn btn-outline-primary col-6 offset-3 mt-4" id="btn_import_verdict">Import</button>
+						</div>
+						<div class="tab-pane fade" id="add_tc_tab_page" role="tabpanel">
+							<div class="row no-gutters">
+								<div>TRS File(s):</div>
+								<div class="col"><input id="add_tc_trs_files" type="file" multiple accept=".xls,.xlsx" /></div>
+							</div>
+							<div class="row no-gutters mt-4">
+								<div>Advance:</div>
+								<div style="margin:0px 6px"><button data-toggle="collapse" data-target="#advance_options">+</button></div>
+								<div id="advance_options" class="collapse container offset-1">
+									<div class="form-check row">
+										<input type="checkbox" class="form-check-input" id="ckb_tc_automated_update">
+										<label class="form-check-label" for="ckb_tc_automated_update">更新Automated屬姓</label>		
+									</div>
+									<div class="form-check row">
+										<input type="checkbox" class="form-check-input" id="ckb_tc_tag_update">
+										<label class="form-check-label" for="ckb_tc_tag_update">更新Tag屬姓</label>										
+									</div>
+								</div> 
+							</div>
+							<button class="btn btn-outline-primary col-6 offset-3 mt-4" id="btn_add_tcs_start" disable>Add</button>
+						</div>
+						<div class="tab-pane fade" id="manage_tr_tab_page" role="tabpanel">
+							<div class="row no-gutters" id="row_tr_state_change">
+								<div>State:</div>
+								<div id="txt_tr_finished_state">Unknown</div>
+								<button id="btn_modify_tr_finished" class="btn-small btn-secondary" style="margin:0px 0px 0px 6px" disabled>Change</button>
+							</div>
+							<div class="row no-gutters mt-4" id="row_tr_delete">
+								<div style="color:red">刪除 TestRun:</div>
+								<button id="btn_tr_delete" class="btn-small btn-danger" style="margin:0px 0px 0px 12px" disabled>DELETE</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="mt-4 col-5 offset-3">
+					<div class="progress" hidden>
+						<div class="progress-bar" id="progress_bar" style="width:0%"></div>
+					</div>
+					<div class="mt-3" style="font-style:italic;" id="response_msg">
+					</div>						
+				</div>													
+			</div>
+			<!--div class="col-1" id="right_panel"></div-->
+		</div>									
+		<div class="row" id="bottom_panel">			
+		</div>
+		<input id="data_uid" type="hidden">
+		<input id="data_user_permission" type="hidden">
+	</body>
+</html>

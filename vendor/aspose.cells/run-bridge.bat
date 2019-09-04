@@ -1,0 +1,1 @@
+%JAVA_HOME%\bin\java -Djava.ext.dirs=lib -jar JavaBridge.jar

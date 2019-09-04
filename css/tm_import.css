@@ -1,0 +1,19 @@
+#main_table{
+	width:100%;
+}
+
+#main_table td{
+	height:60px;
+}
+#main_table tr,td {
+     width:auto;
+}
+
+button{
+	width:100%;
+}
+
+input{
+	width:100%;
+}
+

@@ -1,0 +1,30 @@
+h4{
+    color:royalblue
+}
+
+div{
+    padding:3px
+}
+
+table{
+    width:98%;
+    
+}
+table tr,td,th{
+    border:1px solid black;
+}
+
+table thead{
+    background-color: royalblue;
+    color:white;
+}
+
+#all_users_output_table tr>td[clickable]>font:hover{
+    cursor: pointer;
+    text-decoration:underline;
+    color:royalblue;
+}
+
+#all_users_output_table tr>td[selected]{
+    background-color: greenyellow;
+}
